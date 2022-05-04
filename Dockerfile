@@ -1,5 +1,5 @@
 # base docker image
-FROM openjdk:11-jdk-alpine
+FROM openjdk:11
 
 WORKDIR /app
 
