@@ -1,11 +1,10 @@
 # base docker image
-FROM openjdk:11
+openjdk:16-alpine3.13
 
 WORKDIR /app
 
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
-RUN dos2unix mvnw
 RUN chmod +x ./mvnw dependency:go-offline
 
 COPY src ./src
