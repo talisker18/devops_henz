@@ -1,4 +1,14 @@
 # base docker image
-FROM openjdk:8-jdk-alpine
-COPY /home/hjoel87gmx/Desktop/devops_henz/target/devops_henz-0.0.1.war devops_henz_docker-0.0.1.war
-ENTRYPOINT ["java","-jar","/devops_henz_docker-0.0.1.war"]
+FROM openjdk:11-jdk-alpine
+
+WORKDIR /app
+
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN ./mvnw dependency:go-offline
+
+COPY src ./src
+
+EXPOSE 3000
+
+CMD ["./mvnw", "spring-boot:run"]
