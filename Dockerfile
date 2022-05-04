@@ -14,4 +14,4 @@ FROM openjdk:11
 COPY --from=MAVEN_BUILD /devops_henz/target/devops_henz-0.0.1-SNAPSHOT.jar /devops_henz_dockerized.jar
 
 # set the startup command to execute the jar
-CMD ["java", "-jar", "/devops_henz_dockerized"]
+CMD ["java", "-jar", "/devops_henz_dockerized.jar"]
