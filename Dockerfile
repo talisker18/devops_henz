@@ -1,3 +1,5 @@
+# reference for Dockerfile: https://codefresh.io/docker-tutorial/create-docker-images-for-java/
+
 # the first stage of our build will use a maven 3.6.1 parent image
 FROM maven:3.8.5-jdk-11 AS MAVEN_BUILD
 
