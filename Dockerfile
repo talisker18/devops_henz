@@ -10,7 +10,7 @@ RUN ./mvnw -B dependency:go-offline
 
 COPY src src
 
-RUN ./mvnw -B package                                        
+RUN ./mvnw -B package -DskipTests                                     
 
 FROM openjdk:11-jre-slim-buster
 
