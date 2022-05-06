@@ -1,12 +1,20 @@
-FROM maven:3.8.5-jdk-11 AS MAVEN_BUILD
+FROM openjdk:11-slim-buster as build
 
-COPY ./ ./
+COPY .mvn .mvn
+COPY mvnw .
+COPY pom.xml .
 
-# package our application code
-RUN mvn clean package -DskipTests
+RUN ./mvnw -B dependency:go-offline                          
 
-COPY target/devops_henz-0.0.1-SNAPSHOT.war docker-devops_henz-0.0.1-SNAPSHOT.war
+COPY src src
+
+RUN ./mvnw -B package                                        
+
+FROM openjdk:11-jre-slim-buster
+
+COPY --from=build target/devops_henz-0-0.1-SNAPSHOT.war .
 
 EXPOSE 5000
 
-ENTRYPOINT ["java","-jar","/docker-devops_henz-0.0.1-SNAPSHOT.war"]
+ENTRYPOINT ["java", "-jar", "devops_henz-0-0.1-SNAPSHOT.war"]
+
