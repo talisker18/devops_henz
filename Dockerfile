@@ -12,11 +12,12 @@ COPY src src
 
 RUN ./mvnw -B package -DskipTests                                     
 
-FROM openjdk:11-jre-slim-buster
+#FROM openjdk:11-jre-slim-buster
 
-COPY --from=build /target/devops_henz-0-0.1-SNAPSHOT.war .
+#COPY --from=build target/devops_henz-0-0.1-SNAPSHOT.war .
+COPY target/devops_henz-0-0.1-SNAPSHOT.war devops_henz_docker-0-0.1-SNAPSHOT.war
 
 EXPOSE 5000
 
-ENTRYPOINT ["java", "-jar", "devops_henz-0-0.1-SNAPSHOT.war"]
+ENTRYPOINT ["java", "-jar", "devops_henz_docker-0-0.1-SNAPSHOT.war"]
 
