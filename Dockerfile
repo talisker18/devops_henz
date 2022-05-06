@@ -1,5 +1,7 @@
 FROM maven:3.8.5-jdk-11 AS MAVEN_BUILD
 
+COPY ./ ./
+
 # package our application code
 RUN mvn clean package
 
